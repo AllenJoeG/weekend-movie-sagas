@@ -11,6 +11,28 @@ import createSagaMiddleware from 'redux-saga';
 import { takeEvery, put } from 'redux-saga/effects';
 import axios from 'axios';
 
+//MUI
+import {createTheme, ThemeProvider} from '@mui/material/styles';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      light: '#482880',
+      main: '#673ab7',
+      dark: '#8561c5',
+      contrastText: '#fff',
+    },
+    secondary: {
+      light: '#598e89',
+      main: '#80cbc4',
+      dark: '#99d5cf',
+      contrastText: '#000',
+    },
+  },
+});
+
+
+
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
@@ -139,7 +161,9 @@ sagaMiddleware.run(rootSaga);
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={storeInstance}>
+        <ThemeProvider theme={theme}>
         <App />
+        </ThemeProvider>
         </Provider>
     </React.StrictMode>,
     document.getElementById('root')

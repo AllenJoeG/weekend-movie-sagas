@@ -4,7 +4,24 @@ import { useHistory } from 'react-router-dom';
 import './MovieList.css'
 
 //MUI
-import { Box, Grid, Card, CardHeader, CardMedia, CardActionArea } from '@mui/material'
+import { Box, Grid, Card, CardHeader, CardMedia, CardActionArea, createTheme, ThemeProvider } from '@mui/material'
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      light: '#482880',
+      main: '#673ab7',
+      dark: '#8561c5',
+      contrastText: '#fff',
+    },
+    secondary: {
+      light: '#598e89',
+      main: '#80cbc4',
+      dark: '#99d5cf',
+      contrastText: '#000',
+    },
+  },
+});
 
 function MovieList() {
 
@@ -27,8 +44,18 @@ function MovieList() {
   }
 
   return (
-    <Box margin-top="15px">
-      <Grid container spacing={8} elevation={12} className="movies">
+    <Box 
+      padding="4%"
+    >
+      <Grid 
+        container
+        direction="row"
+        justify-content="space-around"
+        align-items="center"
+        spacing={8}
+        elevation={12}
+        className="movies"
+      >
         {movies.map(movie => {
           return (
             <Grid item key={movie.id} xs={12} sm={6} md={4} lg={3}>
