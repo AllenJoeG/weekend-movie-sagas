@@ -31,7 +31,7 @@ export default function AddMovie() {
         title: movieTitle,
         poster: moviePoster,
         description: movieSummary,
-        genre_id: 5
+        genre_id: movieGenre
       }
     })
   }

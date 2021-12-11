@@ -16,6 +16,19 @@ function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
     yield takeEvery('ADD_MOVIE', postNewMovie);
     yield takeEvery('FETCH_GENRES', fetchAllGenres);
+    yield takeEvery('FETCH_DETAIL', fetchMovieDetails)
+}
+
+//SAGA
+// Fetch details of specific movie
+function* fetchMovieDetails(action) {
+  console.log('in fetchMovieDetails with ID', action.payload);
+  try {
+    const movie = yield axios.get('/api/movie/:id')
+    yield put({ type: 'STORE_MOVIE_DETAILS', payload: movie.data });
+  } catch(error) {
+    console.log('error with GET from server', error);
+  }
 }
 
 //SAGA
@@ -74,6 +87,18 @@ const movies = (state = [], action) => {
 }
 
 //REDUCER
+// Holds specific Movie info for Details page
+const movieDetailReducer = (state = {}, action) => {
+  switch (action.type) {
+    case 'STORE_MOVIE_DETAILS':
+      console.log(action.payload)
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
+//REDUCER
 // Holds the clicked movie.id for Details page
 const idDetailReducer = (state = {}, action) => {
   switch (action.type) {
@@ -96,12 +121,13 @@ const genresReducer = (state = [], action) => {
   }
 }
 
-// Create one store that all components can use
+// REDUX store that combines all Reducers for Component access
 const storeInstance = createStore(
     combineReducers({
         movies,
         genresReducer,
-        idDetailReducer
+        idDetailReducer,
+        movieDetailReducer
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
