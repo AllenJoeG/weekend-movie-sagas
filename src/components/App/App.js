@@ -10,11 +10,13 @@ function App() {
     <div className="App">
       <h1>The Movies Saga!</h1>
       <Router>
-        <div>
-          <p> <Link to="/addmovie"> Add A Movie </Link></p>
-          <p> <Link to="/"> Movie Gallery </Link></p>
-          <p> <Link to="/details"> Movie Details </Link></p>
-        </div>        
+        <nav display="flex">
+          <Link to="/addmovie">Add A Movie</Link>
+          <span> 🍿 </span>
+          <Link to="/"> Movie Gallery</Link>
+          <span> 🍿 </span>
+          <Link to="/details"> Movie Details</Link>
+        </nav>        
         <Route path="/" exact>
           <MovieList />
         </Route>
