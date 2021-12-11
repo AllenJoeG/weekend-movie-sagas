@@ -22,7 +22,11 @@ export default function Details() {
 
   return (
     <div>
-      <p>It's the Details page!</p>
+      
+        {movieDetails.map((movie) => {
+          return(<div><img src={movie.poster}/> <p>{movie.description}</p></div>)
+        })}
+      
     </div>
   )
 };

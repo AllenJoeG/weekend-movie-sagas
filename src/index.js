@@ -24,7 +24,7 @@ function* rootSaga() {
 function* fetchMovieDetails(action) {
   console.log('in fetchMovieDetails with ID', action.payload);
   try {
-    const movie = yield axios.get('/api/movie/:id')
+    const movie = yield axios.get(`api/movie/${action.payload}`)
     yield put({ type: 'STORE_MOVIE_DETAILS', payload: movie.data });
   } catch(error) {
     console.log('error with GET from server', error);
@@ -88,7 +88,7 @@ const movies = (state = [], action) => {
 
 //REDUCER
 // Holds specific Movie info for Details page
-const movieDetailReducer = (state = {}, action) => {
+const movieDetailReducer = (state = [], action) => {
   switch (action.type) {
     case 'STORE_MOVIE_DETAILS':
       console.log(action.payload)

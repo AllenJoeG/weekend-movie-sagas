@@ -16,6 +16,24 @@ router.get('/', (req, res) => {
 
 });
 
+// ROUTE handles specific ID details request
+router.get('/:id', (req, res) => {
+  console.log(req.params.id)
+  const movieID = req.params.id;
+  //Need to update query to JOIN and get genres
+  const query = `SELECT * FROM movies WHERE "id"=$1`;
+  pool.query(query, [movieID])
+    .then( result => {
+      console.log(result.rows);
+      res.send(result.rows);
+    })
+    .catch(err => {
+      console.log('ERROR: Get all movies', err);
+      res.sendStatus(500)
+    })
+
+});
+
 router.post('/', (req, res) => {
   console.log(req.body);
   // RETURNING "id" will give us back the id of the created movie
