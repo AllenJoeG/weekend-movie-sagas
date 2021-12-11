@@ -14,19 +14,35 @@ import axios from 'axios';
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
+    yield takeEvery('ADD_MOVIE', postNewMovie);
 }
 
 //SAGA
 // get all movies from the DB
 function* fetchAllMovies() {
-    //no action on this one
-    try {
-        const movies = yield axios.get('/api/movie');
-        console.log('get all:', movies.data);
-        yield put({ type: 'SET_MOVIES', payload: movies.data });
-    } catch {
-        console.log('get all error');
-    }
+  console.log('in fetchAllMovies');
+  try {
+    const movies = yield axios.get('/api/movie');
+    console.log('get all:', movies.data);
+    yield put({ type: 'SET_MOVIES', payload: movies.data });
+  } catch(error) {
+    console.log('issue with GET from server', error);
+  }
+}
+
+//SAGA
+// post new movie from user input in AddMovie
+function* postNewMovie(action) {
+  console.log('in postNewMovie with:', action.payload)
+  try {
+    const response = yield axios({
+      method: 'POST',
+      url: '/api/movie',
+      data: action.payload
+    })
+  } catch(error) {
+    console.log('issue with POST to Server', error);
+  }
 }
 
 // Create sagaMiddleware
