@@ -3,6 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import './MovieList.css'
 
+//MUI
+import { Box, Grid, Card, CardHeader, CardMedia, CardActionArea } from '@mui/material'
+
 function MovieList() {
 
   const history = useHistory();
@@ -24,19 +27,33 @@ function MovieList() {
   }
 
   return (
-    <main>
-      <h1>MovieList</h1>
-      <section className="movies">
+    <Box margin-top="15px">
+      <Grid container spacing={8} elevation={12} className="movies">
         {movies.map(movie => {
           return (
-            <div key={movie.id} >
-              <h3>{movie.title}</h3>
-              <img onClick={e => handlePosterClick(movie.id)} src={movie.poster} alt={movie.title}/>
-            </div>
+            <Grid item key={movie.id} xs={12} sm={6} md={4} lg={3}>
+              <Card>
+                <CardActionArea onClick={e => handlePosterClick(movie.id)}>
+                  <CardHeader 
+                    sx={{"background-color": "gray", "color": "white"}}
+                    component="h4" 
+                    title={movie.title}
+                  />
+                  <CardMedia
+                    
+                    component="img"
+                    width="200"
+                    src={movie.poster}
+                    alt={movie.title}          
+                  />
+                </CardActionArea>
+              </Card>
+              
+            </Grid>
           );
         })}
-      </section>
-    </main>
+      </Grid>
+    </Box>
 
   );
 }
