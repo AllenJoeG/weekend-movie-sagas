@@ -16,22 +16,23 @@ function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
 }
 
+//SAGA
+// get all movies from the DB
 function* fetchAllMovies() {
-    // get all movies from the DB
+    //no action on this one
     try {
         const movies = yield axios.get('/api/movie');
         console.log('get all:', movies.data);
         yield put({ type: 'SET_MOVIES', payload: movies.data });
-
     } catch {
         console.log('get all error');
     }
-        
 }
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 
+//REDUCER
 // Used to store movies returned from the server
 const movies = (state = [], action) => {
     switch (action.type) {
@@ -42,6 +43,7 @@ const movies = (state = [], action) => {
     }
 }
 
+//REDUCER
 // Used to store the movie genres
 const genres = (state = [], action) => {
     switch (action.type) {
