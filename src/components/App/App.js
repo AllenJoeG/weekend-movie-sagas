@@ -1,4 +1,4 @@
-import {HashRouter as Router, Route, Link} from 'react-router-dom';
+import {HashRouter as Router, Route, Link as RouterLink } from 'react-router-dom';
 import './App.css';
 //Source Components
 import MovieList from '../MovieList/MovieList'
@@ -6,7 +6,8 @@ import Details from '../Details/Details.jsx';
 import AddMovie from '../AddMovie/AddMovie';
 
 //MUI stuff
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
+import Link from '@mui/material/Link';
 
 function App() {
   return (
@@ -15,14 +16,36 @@ function App() {
       className="App"
     >
       <Router>
-        <Box bgcolor="secondary.dark">
-          <h1>The Movies Saga!</h1>
+        <Box 
+        height="3em"
+        bgcolor="secondary.dark">
           <nav display="flex">
-            <Link to="/addmovie">Add A Movie</Link>
+            <Link 
+              component={RouterLink} 
+              underline="hover" 
+              to="/addmovie"
+              onClick={() => {console.info("Link to Add Movie");}}
+            >
+              <Button variant="outlined">Add A Movie</Button>
+            </Link>
             <span> 🍿 </span>
-            <Link to="/"> Movie Gallery</Link>
+            <Link 
+              component={RouterLink}
+              underline="hover"
+              to="/"
+              onClick={() => {console.info("Link to Movie Gallery");}}
+            > 
+            <Button variant="outlined">Movie Gallery</Button>
+            </Link>
             <span> 🍿 </span>
-            <Link to="/details"> Movie Details</Link>
+            <Link 
+              component={RouterLink} 
+              underline="hover" 
+              to="/details"
+              onClick={() => {console.info("Link to Single Movie Detail");}}
+            >
+              <Button variant="outlined">Movie Details</Button>
+            </Link>
           </nav>
         </Box>
         <Box>
