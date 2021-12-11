@@ -48,6 +48,7 @@ This view is completed already! It displays all of the movies in the movie datab
 [ 👍 ] onClick attached to poster.
 
 - TODO: Have a way to get to the Add Movie Page
+👍 Accomplished w Nav Bar that persists at top
 
 ### Details Page
 
