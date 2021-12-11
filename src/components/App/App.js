@@ -16,8 +16,7 @@ function App() {
           <Link to="/"> Movie Gallery</Link>
           <span> 🍿 </span>
           <Link to="/details"> Movie Details</Link>
-        </nav>
-                
+        </nav>        
         <Route path="/" exact>
           <MovieList />
         </Route>
