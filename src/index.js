@@ -44,6 +44,18 @@ const movies = (state = [], action) => {
 }
 
 //REDUCER
+// Holds the clicked movie.id for Details page
+const idDetailReducer = (state = {}, action) => {
+  switch (action.type) {
+    case 'STORE_DETAIL_ID':
+      console.log(action.payload)
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
+//REDUCER
 // Used to store the movie genres
 const genres = (state = [], action) => {
     switch (action.type) {
@@ -59,6 +71,7 @@ const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
+        idDetailReducer
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
