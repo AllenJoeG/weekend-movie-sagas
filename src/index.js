@@ -44,7 +44,7 @@ function* rootSaga() {
 //SAGA
 // Fetch details of specific movie
 function* fetchMovieDetails(action) {
-  console.log('in fetchMovieDetails with ID', action.payload);
+  // console.log('in fetchMovieDetails with ID', action.payload);
   try {
     const movie = yield axios.get(`api/movie/${action.payload}`)
     yield put({ type: 'STORE_MOVIE_DETAILS', 
@@ -63,7 +63,7 @@ function* fetchMovieDetails(action) {
 //SAGA
 // get all movies from the DB
 function* fetchAllMovies() {
-  console.log('in fetchAllMovies');
+  // console.log('in fetchAllMovies');
   try {
     const movies = yield axios.get('/api/movie');
     // console.log('get all:', movies.data);
@@ -76,7 +76,7 @@ function* fetchAllMovies() {
 //SAGA
 // get all genres from the DB
 function* fetchAllGenres() {
-  console.log('in fetchAllGenres');
+  // console.log('in fetchAllGenres');
   try {
     const genres = yield axios.get('/api/genre');
     console.log('get all:', genres.data);
@@ -89,7 +89,7 @@ function* fetchAllGenres() {
 //SAGA
 // post new movie from user input in AddMovie
 function* postNewMovie(action) {
-  console.log('in postNewMovie with:', action.payload)
+  // console.log('in postNewMovie with:', action.payload)
   try {
     const response = yield axios({
       method: 'POST',

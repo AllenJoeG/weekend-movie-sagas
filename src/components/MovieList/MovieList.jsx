@@ -45,7 +45,7 @@ function MovieList() {
         {movies.map(movie => {
           return (
             <Grid item key={movie.id} xs={12} sm={6} md={4} lg={3}>
-              <Card className="card">
+              <Card className="card" elevation="12">
                 <CardActionArea onClick={e => handlePosterClick(movie.id)}>
                   <CardHeader 
                     component="h4"

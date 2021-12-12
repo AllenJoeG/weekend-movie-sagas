@@ -65,6 +65,7 @@ export default function AddMovie() {
                 label='Movie Title' 
                 value={movieTitle} 
                 onChange={e => setMovieTitle(e.target.value)}
+                helperText="What is the Name of the Film?"
             />
           </Grid>
           <Grid item xs={12} sm={6} md={3} lg={3}>
@@ -77,6 +78,7 @@ export default function AddMovie() {
                 label='Poster URL' 
                 value={moviePoster} 
                 onChange={e => setMoviePoster(e.target.value)}
+                helperText="Please Provide a URL for Poster"
             />
           </Grid>
           <Grid item xs={12} sm={6} md={3} lg={3}>
@@ -90,6 +92,7 @@ export default function AddMovie() {
                 label='Movie Summary' 
                 value={movieSummary} 
                 onChange={e => setMovieSummary(e.target.value)}
+                helperText="Please Describe the Film"
             />
           </Grid>
           <Grid item xs={12} sm={6} md={3} lg={3}>
@@ -99,7 +102,8 @@ export default function AddMovie() {
               fullWidth
               color="secondary"
               variant="filled"
-              formLabel="Select a Genre"
+              formlabel="Select a Genre"
+              value={movieGenre}
               onChange={handleGenre}
               name="genres" 
               id="movieGenres"
@@ -107,8 +111,8 @@ export default function AddMovie() {
               helperText="Please Select a Genre"
             >
               {/* Map through dbrow category result. Need Saga/Reducer */}
-              {genres.map((genre) => {
-                return <MenuItem value={genre.id}>{genre.name}</MenuItem>
+              {genres.map((genre, i) => {
+                return <MenuItem key={i} value={genre.id}>{genre.name}</MenuItem>
               })}
             </TextField>
           </Grid>
