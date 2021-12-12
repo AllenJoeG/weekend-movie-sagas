@@ -30,8 +30,19 @@ router.get('/:id', (req, res) => {
   `;
   pool.query(query, [movieID])
     .then( result => {
-      console.log(result.rows);
-      res.send(result.rows);
+      // console.log(result.rows);
+      const genreArray = [];
+      for (let x of result.rows){
+        genreArray.push(x.name)
+      }
+      const tailoredResult = {
+        title: result.rows[0].title,
+        poster: result.rows[0].poster,
+        description: result.rows[0].description,
+        genre: genreArray
+      }
+      // console.log(tailoredResult);
+      res.send(tailoredResult);
     })
     .catch(err => {
       console.log('ERROR: could not fetch by ID', err);

@@ -47,7 +47,14 @@ function* fetchMovieDetails(action) {
   console.log('in fetchMovieDetails with ID', action.payload);
   try {
     const movie = yield axios.get(`api/movie/${action.payload}`)
-    yield put({ type: 'STORE_MOVIE_DETAILS', payload: movie.data });
+    yield put({ type: 'STORE_MOVIE_DETAILS', 
+                payload: [{
+                  title: movie.data.title, 
+                  poster: movie.data.poster, 
+                  description: movie.data.description
+                }]
+          });
+    yield put({ type: 'STORE_GENRE_DETAILS', payload: movie.data.genre})
   } catch(error) {
     console.log('error with GET from server', error);
   }
@@ -121,6 +128,19 @@ const movieDetailReducer = (state = [], action) => {
 }
 
 //REDUCER
+// Holds specific Genre info for Details page
+const genreDetailReducer = (state = [], action) => {
+  switch (action.type) {
+    case 'STORE_GENRE_DETAILS':
+      console.log(action.payload)
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
+
+//REDUCER
 // Holds the clicked movie.id for Details page
 const idDetailReducer = (state = {}, action) => {
   switch (action.type) {
@@ -149,7 +169,8 @@ const storeInstance = createStore(
         movies,
         genresReducer,
         idDetailReducer,
-        movieDetailReducer
+        movieDetailReducer,
+        genreDetailReducer
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),

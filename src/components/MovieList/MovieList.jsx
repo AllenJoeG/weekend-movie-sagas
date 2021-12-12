@@ -7,10 +7,12 @@ import './MovieList.css'
 import { Box, Grid, Card, CardHeader, CardMedia, CardActionArea,} from '@mui/material'
 
 function MovieList() {
-
+  //alias HOOKS
   const history = useHistory();
   const dispatch = useDispatch();
+  //Global REDUCERS
   const movies = useSelector(store => store.movies);
+  
 
   useEffect(() => {
     dispatch({ type: 'FETCH_MOVIES' });
@@ -22,6 +24,7 @@ function MovieList() {
       type: 'STORE_DETAIL_ID',
       payload: id
     });
+
     //navigate to Details view
     history.push(`/details`)
   }
