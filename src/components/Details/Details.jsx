@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import './Details.css'
+
+//MUI STUFF
+import {Box, Grid, Card, CardHeader, CardMedia, CardContent, Typography } from '@mui/material';
 
 export default function Details() {
    //alias HOOKS
@@ -19,17 +23,45 @@ export default function Details() {
   }, []);
 
   return (
-    <div>
-      <ul>
-      {genreDetails.map((genre) => {
-        return <li>{genre}</li>
-      })}
-      </ul>
-      
-      {movieDetails.map((movie) => {
-        return(<div><img src={movie.poster}/> <p>{movie.description}</p></div>)
-      })}
+    <Box>
+      <Grid container>
+        <Grid item xs={1} sm={2} md={3}></Grid>
+          <Grid item xs={10} sm={8} md={6}>
+            <Card className="card" elevation="12">
+              <CardHeader
+                component="h4"
+                className="cardHeader"
+              />
+                {movieDetails.map((movie) => {
+                  return(<CardMedia component="img" src={movie.poster}/>)
+                })}
+              <CardContent
+                bgcolor="secondary.light"
+                
+              >
+                {genreDetails.map((genre) => {
+                  return <p>{genre}</p>
+                })}
+                {movieDetails.map((movie) => {
+                  return(<Typography>{movie.description}</Typography>)
+                })}
+              </CardContent>
+                
+            </Card>
+          </Grid>
+        
+        
+        
+        
+        
 
-    </div>
+        <Grid item xs={1} sm={2} md={3}></Grid>
+      </Grid>
+
+    </Box>
   )
 };
+
+// {movieDetails.map((movie) => {
+//   return(<div><img src={movie.poster}/> <p>{movie.description}</p></div>)
+// })}
