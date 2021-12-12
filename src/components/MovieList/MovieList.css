@@ -8,5 +8,5 @@
 .cardHeader {
   margin: 0;
   background-image: url('film-strip.png');
-  background-repeat: no-repeat
+  background-repeat: cover;
 }
