@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
+//MUI stuff
+import { Box, Grid, TextField, Button, MenuItem } from '@mui/material';
 
 export default function AddMovie() {
   //alias HOOKS
@@ -48,41 +50,77 @@ export default function AddMovie() {
   }
 
   return(
-    <div>
-      <p>It's the Add Movie Form!</p>
+    <Box
+      height={800}
+    >
       <form onSubmit={handleAddMovie}>
-        <input
-            type='text'
-            placeholder='Movie Title' 
-            value={movieTitle} 
-            onChange={e => setMovieTitle(e.target.value)}
-        />
-        <input
-            type='text'
-            placeholder='Poster URL' 
-            value={moviePoster} 
-            onChange={e => setMoviePoster(e.target.value)}
-        />
-        <textarea
-            type='text'
-            placeholder='Movie Summary' 
-            value={movieSummary} 
-            onChange={e => setMovieSummary(e.target.value)}
-        />
-        <select 
-          formLabel="Select a Genre"
-          onChange={handleGenre}
-          name="genres" 
-          id="movieGenres">
-          {/* Map through dbrow category result. Need Saga/Reducer */}
-          <option value="42">Select Genre</option>
-          {genres.map((genre) => {
-            return <option value={genre.id}>{genre.name}</option>
-          })}
-        </select>
-        <button onClick={handleCancel}>Cancel</button>
-        <button type="submit">Save</button>
+        <Grid container spacing={2}>        
+          <Grid item xs={12} sm={6} md={3} lg={3}>
+            <TextField
+                required
+                fullWidth
+                color="secondary"
+                variant="filled"
+                type='text'
+                label='Movie Title' 
+                value={movieTitle} 
+                onChange={e => setMovieTitle(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} md={3} lg={3}>
+            <TextField
+                required
+                fullWidth
+                color="secondary"
+                variant="filled"
+                type='text'
+                label='Poster URL' 
+                value={moviePoster} 
+                onChange={e => setMoviePoster(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} md={3} lg={3}>
+            <TextField
+                required
+                fullWidth
+                multiline
+                color="secondary"
+                variant="filled"
+                type='text'
+                label='Movie Summary' 
+                value={movieSummary} 
+                onChange={e => setMovieSummary(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} md={3} lg={3}>
+            <TextField
+              select
+              required
+              fullWidth
+              color="secondary"
+              variant="filled"
+              formLabel="Select a Genre"
+              onChange={handleGenre}
+              name="genres" 
+              id="movieGenres"
+              label="Genre"
+              helperText="Please Select a Genre"
+            >
+              {/* Map through dbrow category result. Need Saga/Reducer */}
+              {genres.map((genre) => {
+                return <MenuItem value={genre.id}>{genre.name}</MenuItem>
+              })}
+            </TextField>
+          </Grid>
+          <Grid item xs={6} sm={6} md={6} lg={6}>
+            <Button variant="outlined" color="error" onClick={handleCancel}>Cancel</Button>
+          </Grid>
+          <Grid item xs={6} sm={6} md={6} lg={6}>
+            <Button variant="contained" color="secondary" type="submit">Save Movie</Button>
+          </Grid>
+        </Grid>
       </form>
-    </div>
+      
+    </Box>
   )
 }

@@ -160,11 +160,11 @@ sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
     <React.StrictMode>
-        <Provider store={storeInstance}>
+      <Provider store={storeInstance}>
         <ThemeProvider theme={theme}>
-        <App />
+          <App />
         </ThemeProvider>
-        </Provider>
+      </Provider>
     </React.StrictMode>,
     document.getElementById('root')
 );
