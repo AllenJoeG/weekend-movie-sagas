@@ -55,9 +55,10 @@ export default function AddMovie() {
     >
       <form onSubmit={handleAddMovie}>
         <Grid container spacing={2}>        
-          <Grid item xs={12} sm={6} md={6} lg={3}>
+          <Grid item xs={12} sm={6} md={3} lg={3}>
             <TextField
                 required
+                fullWidth
                 color="secondary"
                 variant="filled"
                 type='text'
@@ -66,9 +67,10 @@ export default function AddMovie() {
                 onChange={e => setMovieTitle(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={6} lg={3}>
+          <Grid item xs={12} sm={6} md={3} lg={3}>
             <TextField
                 required
+                fullWidth
                 color="secondary"
                 variant="filled"
                 type='text'
@@ -77,9 +79,10 @@ export default function AddMovie() {
                 onChange={e => setMoviePoster(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={6} lg={3}>
+          <Grid item xs={12} sm={6} md={3} lg={3}>
             <TextField
                 required
+                fullWidth
                 multiline
                 color="secondary"
                 variant="filled"
@@ -89,10 +92,11 @@ export default function AddMovie() {
                 onChange={e => setMovieSummary(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={6} lg={3}>
+          <Grid item xs={12} sm={6} md={3} lg={3}>
             <TextField
               select
               required
+              fullWidth
               color="secondary"
               variant="filled"
               formLabel="Select a Genre"
@@ -108,10 +112,11 @@ export default function AddMovie() {
               })}
             </TextField>
           </Grid>
-          <Grid item xs={12} sm={6} md={12} lg={12}>
+          <Grid item xs={6} sm={6} md={6} lg={6}>
             <Button variant="outlined" color="error" onClick={handleCancel}>Cancel</Button>
-          
-            <Button variant="contained" color="secondary" type="submit">Save</Button>
+          </Grid>
+          <Grid item xs={6} sm={6} md={6} lg={6}>
+            <Button variant="contained" color="secondary" type="submit">Save Movie</Button>
           </Grid>
         </Grid>
       </form>

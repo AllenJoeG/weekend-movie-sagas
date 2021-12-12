@@ -22,7 +22,6 @@ export default function Details() {
 
   return (
     <div>
-      
         {movieDetails.map((movie) => {
           return(<div><img src={movie.poster}/> <p>{movie.description}</p></div>)
         })}

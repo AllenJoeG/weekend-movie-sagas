@@ -13,7 +13,6 @@ router.get('/', (req, res) => {
       console.log('ERROR: Get all movies', err);
       res.sendStatus(500)
     })
-
 });
 
 // ROUTE handles specific ID details request
@@ -21,17 +20,23 @@ router.get('/:id', (req, res) => {
   console.log(req.params.id)
   const movieID = req.params.id;
   //Need to update query to JOIN and get genres
-  const query = `SELECT * FROM movies WHERE "id"=$1`;
+  const query = `
+    SELECT "title", "poster", "description", "name" FROM "movies"
+      JOIN "movies_genres"
+        ON "movies_genres"."movie_id"="movies"."id"
+      JOIN "genres"
+        ON "genres"."id"="movies_genres"."genre_id"
+      WHERE movie_id=$1;
+  `;
   pool.query(query, [movieID])
     .then( result => {
       console.log(result.rows);
       res.send(result.rows);
     })
     .catch(err => {
-      console.log('ERROR: Get all movies', err);
+      console.log('ERROR: could not fetch by ID', err);
       res.sendStatus(500)
     })
-
 });
 
 router.post('/', (req, res) => {
